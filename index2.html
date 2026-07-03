@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0d47a1;
+            box-shadow: 0 0 5px rgba(13,71,161,0.3);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #0d47a1;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media(max-width: 500px) {
+            .card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Registration Form -->
+    <div class="card" id="registerForm">
+        <h2>Student Registration</h2>
+        <form>
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" placeholder="Enter your full name" required>
+
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" placeholder="Enter your email" required>
+
+            <label for="regStudentID">Student ID</label>
+            <input type="text" id="regStudentID" placeholder="Enter your student ID" required>
+
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="Create password" required>
+
+            <button type="button" onclick="registerUser()">Register</button>
+        </form>
+        <div class="toggle-link" onclick="showLogin()">Already have an account? Login</div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="card hidden" id="loginForm">
+        <h2>Student Login</h2>
+        <form>
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+            <button type="button" onclick="loginUser()">Login</button>
+        </form>
+        <div class="toggle-link" onclick="showRegister()">Don't have an account? Register</div>
+    </div>
+
+    <!-- Fee Payment Form -->
+    <div class="card hidden" id="paymentForm">
+        <h2>College Fee Payment</h2>
+        <form>
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="Enter your full name" required>
+
+            <label for="studentID">Student ID</label>
+            <input type="text" id="studentID" placeholder="Enter your student ID" required>
+
+            <label for="course">Course</label>
+            <input type="text" id="course" placeholder="Enter your course name" required>
+
+            <label for="amount">Fee Amount (₹)</label>
+            <input type="number" id="amount" placeholder="Enter fee amount" required>
+
+            <label for="contact">Contact Number</label>
+            <input type="tel" id="contact" placeholder="Enter your phone number" required>
+
+            <button type="button" onclick="payFee()">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        // Show Registration Form
+        function showRegister() {
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('paymentForm').classList.add('hidden');
+        }
+
+        // Show Login Form
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('paymentForm').classList.add('hidden');
+        }
+
+        // Show Payment Form
+        function showPayment() {
+            document.getElementById('paymentForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        // Simple frontend registration (demo)
+        function registerUser() {
+            alert('Registration Successful! Please login.');
+            showLogin();
+        }
+
+        // Simple frontend login (demo)
+        function loginUser() {
+            // Demo validation, in real app use backend
+            alert('Login Successful! Proceed to fee payment.');
+            showPayment();
+        }
+
+        function payFee() {
+            alert('Payment Successful! Thank you.');
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- Dark Mode Toggle Start -->
+<button onclick="toggleMode()" 
+style="position:fixed; top:20px; right:20px; padding:8px 15px; border:none; border-radius:20px; cursor:pointer; z-index:999;">
+🌙 Dark Mode
+</button>
+
+<style>
+.dark {
+    background-color: #121212 !important;
+    color: white !important;
+}
+
+.dark .card {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}
+
+.dark input {
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border: 1px solid #555 !important;
+}
+
+.dark button {
+    background-color: #333 !important;
+    color: white !important;
+}
+</style>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+<!-- Dark Mode Toggle End -->
+
+
+
+<!-- ===== ANIMATED GRADIENT BACKGROUND START ===== -->
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    font-family: Arial, sans-serif;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+}
+</style>
+
+<!-- ===== ANIMATED GRADIENT BACKGROUND END ===== -->
+
+<!-- ===== LIQUID GLASS WELCOME EFFECT START ===== -->
+
+<div id="glassWelcome">
+    <div class="glassCard">
+        <h1>Welcome</h1>
+        <p>Smart College Portal</p>
+        <p class="owner">Designed by Professionals</p>
+    </div>
+</div>
+
+<style>
+/* Full Screen Overlay */
+#glassWelcome{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #0f2027);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation: fadeOut 2s ease 3s forwards;
+}
+
+/* Glass Card */
+.glassCard{
+    background: rgba(255, 255, 255, 0.15);
+    padding:50px 70px;
+    border-radius:25px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    text-align:center;
+    color:white;
+    animation: float 3s ease-in-out infinite;
+}
+
+.glassCard h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.glassCard p{
+    font-size:18px;
+    margin:5px 0;
+}
+
+.owner{
+    font-size:14px;
+    opacity:0.8;
+}
+
+/* Floating Animation */
+@keyframes float{
+    0%{ transform:translateY(0px); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0px); }
+}
+
+/* Fade Out Effect */
+@keyframes fadeOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+    }
+}
+
+</style>
+
+<!-- ===== LIQUID GLASS WELCOME EFFECT END ===== -->
+
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Document Verification Demo</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;padding:20px}
+.card{max-width:700px;margin:auto;background:#fff;padding:20px;border-radius:10px}
+img{max-width:100%;margin-top:10px}
+pre{background:#eee;padding:10px;white-space:pre-wrap}
+.ok{color:green;font-weight:bold}.bad{color:red;font-weight:bold}
+</style></head><body>
+<div class="card">
+<h2>Document Verification (Demo)</h2>
+<p>Upload Fee Receipt / ID Card / Admission Form.</p>
+<input type="file" id="file" accept="image/*">
+<img id="preview">
+<button onclick="verify()">Verify Document</button>
+<div id="result"></div>
+<pre id="ocr">OCR output will appear here when Tesseract.js is loaded.</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+const file=document.getElementById('file');
+file.onchange=e=>{
+ const f=e.target.files[0];
+ if(f) preview.src=URL.createObjectURL(f);
+};
+async function verify(){
+ const f=file.files[0];
+ if(!f){alert("Select a document.");return;}
+ result.innerHTML="Processing...";
+ const {data:{text}}=await Tesseract.recognize(f,'eng');
+ ocr.textContent=text;
+ let ok=text.toLowerCase().includes("receipt")||
+         text.toLowerCase().includes("roll")||
+         text.toLowerCase().includes("student");
+ result.innerHTML= ok?
+ '<p class="ok">✔ Basic verification passed (demo).</p>':
+ '<p class="bad">✖ Required keywords not found.</p>';
+}
+</script></body></html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pay & Upload Document</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+.card{
+width:360px;
+background:#fff;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+text-align:center;
+}
+img{
+width:100%;
+border-radius:10px;
+}
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+background:#0d6efd;
+color:#fff;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+}
+#upload{
+display:none;
+margin-top:20px;
+}
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Complete Payment</h2>
+
+<img src="qr.jpg" alt="UPI QR">
+
+<p>Scan the QR Code and Pay</p>
+
+<button onclick="showUpload()">I Have Paid</button>
+
+<div id="upload">
+<h3>Upload Document</h3>
+<input type="file">
+<button onclick="alert('Document Sent Successfully')">Send Document</button>
+</div>
+
+</div>
+
+<script>
+function showUpload(){
+document.getElementById("upload").style.display="block";
+}
+</script>
+
+</body>
+</html>
